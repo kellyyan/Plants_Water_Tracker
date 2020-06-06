@@ -1,10 +1,15 @@
 package com.example.plantswatertracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Xml;
 import android.view.View;
 import android.view.Menu;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -18,7 +23,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -63,14 +78,78 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public static final String EXTRA_NAME = "com.example.plantswatertracker.NAME";
-    
-    public void addPlant(View view){
-        Intent intent = new Intent(this, DisplayPlantsActivity.class);
-        EditText editText = (EditText) findViewById(R.id.plant_name);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_NAME, message);
-        startActivity(intent);
+    private static final String FILE_NAME = "plantList.txt";
 
+   public static List<String> data = new ArrayList<String>();
+
+    public void addPlant(View v) {
+        EditText mEditText = findViewById(R.id.plant_name);
+        Spinner spin = findViewById(R.id.type_plant);
+        String name = mEditText.getText().toString();
+        String text = new String();
+
+        if (spin.getSelectedItem().toString().equals("Annual")){
+            text += name + " " + 5 + "\n";
+        } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
+            text += name + " " + 33 + "\n";
+        } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
+            text += name + " " + 22 + "\n";
+        } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
+            text += name + " " + 14 + "\n";
+        } else {
+            text += name + " " + 3 + "\n";
+        }
+
+        data.add(name + "\n\nType: " + spin.getSelectedItem().toString());
+
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_APPEND);
+            fos.write(text.getBytes());
+            mEditText.getText().clear();
+            Toast.makeText(this, "Saved" + name,
+                    Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public ArrayList<String> load(View v) {
+        FileInputStream fis = null;
+        ArrayList<String> arr = new ArrayList<>();
+        try {
+            fis = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader br = new BufferedReader(isr);
+            String text;
+            while ((text = br.readLine()) != null) {
+                arr.add(text);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return arr;
     }
 }
+
+
