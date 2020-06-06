@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="plant_types">
+        <item>Annual</item>
+        <item>Cactus/Succulent</item>
+        <item>Shrub (desert adapted)</item>
+        <item>Shrub (high water use)</item>
+        <item>Other</item>
+    </string-array>
+</resources>
