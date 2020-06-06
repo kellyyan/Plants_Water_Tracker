@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="plant_name">Plant Name</string>
+    <string name="button_add">Add</string>
+    <string name="see_plants">See All Plants</string>
+    <string name="my_plants">My Plants</string>
 </resources>

@@ -1,8 +1,10 @@
 package com.example.plantswatertracker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -59,5 +61,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public static final String EXTRA_NAME = "com.example.plantswatertracker.NAME";
+    
+    public void addPlant(View view){
+        Intent intent = new Intent(this, DisplayPlantsActivity.class);
+        EditText editText = (EditText) findViewById(R.id.plant_name);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_NAME, message);
+        startActivity(intent);
+
     }
 }
