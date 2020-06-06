@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    public static List<String> data = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,15 @@ public class MainActivity extends AppCompatActivity  {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        ArrayList<String> saved_data = load();
+
+        for(String s : saved_data){
+            String[] split = s.split(" ");
+            String added =  "\n" + split[0] + "\n\nType: " + split[1];
+
+            data.add(added);
+        }
     }
 
     @Override
@@ -80,7 +91,6 @@ public class MainActivity extends AppCompatActivity  {
 
     private static final String FILE_NAME = "plantList.txt";
 
-   public static List<String> data = new ArrayList<String>();
 
     public void addPlant(View v) {
         EditText mEditText = findViewById(R.id.plant_name);
@@ -89,25 +99,25 @@ public class MainActivity extends AppCompatActivity  {
         String text = new String();
 
         if (spin.getSelectedItem().toString().equals("Annual")){
-            text += name + " " + 5 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
-            text += name + " " + 33 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + 22 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 22 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + 14 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 14 + "\n";
         } else {
-            text += name + " " + 3 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
         }
 
-        data.add(name + "\n\nType: " + spin.getSelectedItem().toString());
+        data.add("\n" + name + "\n\nType: " + spin.getSelectedItem().toString());
 
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILE_NAME, MODE_APPEND);
             fos.write(text.getBytes());
             mEditText.getText().clear();
-            Toast.makeText(this, "Saved" + name,
+            Toast.makeText(this, "Saved " + name,
                     Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -124,7 +134,7 @@ public class MainActivity extends AppCompatActivity  {
         }
     }
 
-    public ArrayList<String> load(View v) {
+    public ArrayList<String> load() {
         FileInputStream fis = null;
         ArrayList<String> arr = new ArrayList<>();
         try {
