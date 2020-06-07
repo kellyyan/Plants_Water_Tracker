@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity  {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Welcome to our app! Here you can save water while understanding how much water your plant needs.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -160,6 +162,8 @@ public class MainActivity extends AppCompatActivity  {
         }
         return arr;
     }
+
+
 }
 
 
