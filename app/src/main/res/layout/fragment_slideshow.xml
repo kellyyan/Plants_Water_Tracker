@@ -62,31 +62,17 @@
             tools:context=".ui.gallery.GalleryFragment">
 
             <TextView
-                android:id="@+id/text_slideshow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:id="@+id/infoOnWaterSaved"
+                android:layout_width="356dp"
+                android:layout_height="431dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="You saved ___ water!\nDetails: "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:text="textslideshowtesting!!" />
+                tools:text="You saved ___ water!\nDetails:" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/infoOnWaterSaved"
-        android:layout_width="356dp"
-        android:layout_height="431dp"
-        android:text="You saved ___ water!\nDetails: "
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="center"
-        tools:text="You saved ___ water!\nDetails:" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

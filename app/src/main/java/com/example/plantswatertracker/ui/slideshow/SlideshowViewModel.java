@@ -10,13 +10,15 @@ import androidx.lifecycle.ViewModel;
 import com.example.plantswatertracker.R;
 import com.google.android.material.tabs.TabItem;
 
+import static com.example.plantswatertracker.MainActivity.data;
+
 public class SlideshowViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
     public SlideshowViewModel() {
         mText = new MutableLiveData<>();
-        //mText.setValue("Click on the tabs below to view the amount of water you saved in each scenario!");
+        mText.setValue("You saved water for " + data.size() + " plants! \nDetails: ");
 
     }
 

@@ -15,7 +15,7 @@
     <string name="see_plants">See All Plants</string>
     <string name="my_plants">My Plants</string>
     <string name="save_button">Save Changes</string>
-    <string name="format">Format: Name Type Days Between Watering</string>
+    <string name="format">Format: (Name) (Type) (Days Between Watering)</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
