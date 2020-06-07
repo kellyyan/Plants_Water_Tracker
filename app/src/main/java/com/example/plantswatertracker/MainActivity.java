@@ -68,6 +68,14 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        ArrayList<String> saved_data = load();
+
+        for(String s : saved_data){
+            String[] split = s.split(" ");
+            String added =  "\n" + split[0] + "\n\nType: " + split[1];
+
+            data.add(added);
+        }
     }
 
     @Override
@@ -104,13 +112,13 @@ public class MainActivity extends AppCompatActivity  {
         }
 
         if (spin.getSelectedItem().toString().equals("Annual")){
-            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
-            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString().replace(' ', '_') + " " + 22 + "\n";
-        } else if (spin.getSelectedItem().toString().equals("Shrub (high water use)")){
-            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString().replace(' ', '_') + " " + 14 + "\n";
+            text += name + " " + spin.getSelectedItem().toString() + " " + 22 + "\n";
+        } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
+            text += name + " " + spin.getSelectedItem().toString() + " " + 14 + "\n";
         } else {
             text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
         }
@@ -174,6 +182,7 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         }
+
 
 
     }
