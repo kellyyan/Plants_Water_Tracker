@@ -34,7 +34,6 @@ public class HomeFragment extends Fragment {
     ListView listView;
     EditText textValue;
     Button addButton;
-    Spinner spin;
 
 
 
