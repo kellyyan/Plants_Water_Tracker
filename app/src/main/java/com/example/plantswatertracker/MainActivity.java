@@ -67,14 +67,6 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        ArrayList<String> saved_data = load();
-
-        for(String s : saved_data){
-            String[] split = s.split(" ");
-            String added =  "\n" + split[0].replace('_', ' ') + "\n\nType: " + split[1].replace('_', ' ');
-
-            data.add(added);
-        }
     }
 
     @Override
@@ -133,6 +125,14 @@ public class MainActivity extends AppCompatActivity  {
                     e.printStackTrace();
                 }
             }
+        }
+
+        ArrayList<String> saved_data = load();
+
+        for(int i = saved_data.size() -1; i >= 0; i--){
+            String[] split = saved_data.get(i).split(" ");
+            String added =  "\n" + split[0].replace('_', ' ') + "\n\nType: " + split[1].replace('_', ' ');
+            data.add(added);
         }
     }
 
