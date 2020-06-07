@@ -48,8 +48,7 @@ public class HomeFragment extends Fragment {
         addButton = (Button) root.findViewById(R.id.add_button);
         listView = (ListView) root.findViewById(R.id.listView);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, data);
+        MyCustomAdapter adapter = new MyCustomAdapter(data, getContext());
 
         listView.setAdapter(adapter);
 
