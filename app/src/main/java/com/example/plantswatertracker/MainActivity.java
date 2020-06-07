@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity  {
 
     private AppBarConfiguration mAppBarConfiguration;
 
-    public static List<String> data = new ArrayList<String>();
+    public static ArrayList<String> data = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,16 @@ public class MainActivity extends AppCompatActivity  {
         String name = mEditText.getText().toString();
         String text = new String();
 
+        ArrayList<String> saved_data = load();
+
+        for(String item : saved_data){
+            String s = item.replace("_", " ");
+            String[] split = s.split(" ");
+            String added =  "\n" + split[0] + "\n\nType: " + split[1];
+
+            data.add(added);
+        }
+
         if (spin.getSelectedItem().toString().equals("Annual")){
             text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
@@ -101,7 +112,7 @@ public class MainActivity extends AppCompatActivity  {
         } else if (spin.getSelectedItem().toString().equals("Shrub (high water use)")){
             text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString().replace(' ', '_') + " " + 14 + "\n";
         } else {
-            text += name + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
+            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
         }
 
         data.add("\n" + name + "\n\nType: " + spin.getSelectedItem().toString());
@@ -111,7 +122,7 @@ public class MainActivity extends AppCompatActivity  {
             fos = openFileOutput(FILE_NAME, MODE_APPEND);
             fos.write(text.getBytes());
             mEditText.getText().clear();
-            Toast.makeText(this, "Saved " + name,
+            Toast.makeText(this, "Added " + name,
                     Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -127,14 +138,46 @@ public class MainActivity extends AppCompatActivity  {
             }
         }
 
-        ArrayList<String> saved_data = load();
 
-        for(int i = saved_data.size() -1; i >= 0; i--){
-            String[] split = saved_data.get(i).split(" ");
-            String added =  "\n" + split[0].replace('_', ' ') + "\n\nType: " + split[1].replace('_', ' ');
-            data.add(added);
-        }
+
+
     }
+
+    public void save(View v){
+        ArrayList<String> loaded = load();
+        ArrayList<String> toWrite = new ArrayList<>();
+        for(String item : loaded){
+            String s = item.replace("_", " ");
+            String[] split = s.split(" ");
+            if(data.contains("\n" + split[0] + "\n\nType: " + split[1])){
+                toWrite.add(item);
+            }
+
+        }
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            for(String text :toWrite){
+                fos.write(text.getBytes());
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+
+    }
+
 
     public ArrayList<String> load() {
         FileInputStream fis = null;

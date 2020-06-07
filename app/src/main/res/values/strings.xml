@@ -14,4 +14,6 @@
     <string name="button_add">Add</string>
     <string name="see_plants">See All Plants</string>
     <string name="my_plants">My Plants</string>
+    <string name="save_button">Save Changes</string>
+
 </resources>
