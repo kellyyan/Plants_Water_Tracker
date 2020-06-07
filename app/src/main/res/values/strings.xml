@@ -14,4 +14,6 @@
     <string name="button_add">Add</string>
     <string name="see_plants">See All Plants</string>
     <string name="my_plants">My Plants</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -18,6 +18,9 @@ import com.google.android.material.tabs.TabLayout;
 
 public class SlideshowFragment extends Fragment {
     TabItem tab1;
+    TabItem tab2;
+    TabItem tab3;
+    TextView info;
 
     private SlideshowViewModel slideshowViewModel;
 
@@ -25,15 +28,16 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View r = inflater.inflate(R.layout.fragment_slideshow, container, false);
         tab1 = r.findViewById(R.id.tab1);
-        TabItem tab2 = r.findViewById(R.id.tab2);
-        TabItem tab3 = r.findViewById(R.id.tab3);
-        final TextView info = r.findViewById(R.id.infoOnWaterSaved);
+        tab2 = r.findViewById(R.id.tab2);
+        tab3 = r.findViewById(R.id.tab3);
+        info = r.findViewById(R.id.infoOnWaterSaved);
         TabLayout tabLayout = (TabLayout) r.findViewById(R.id.tabs); // get the reference of TabLayout
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 // called when tab selected
-                info.setText("The water is" );
+                info.setText("The water is wa   iew;josfkd" );
+
             }
 
             @Override
@@ -65,3 +69,4 @@ public class SlideshowFragment extends Fragment {
 
     }
 }
+
