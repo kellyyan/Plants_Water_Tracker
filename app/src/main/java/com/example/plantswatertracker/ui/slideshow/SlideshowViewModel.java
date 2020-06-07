@@ -1,8 +1,14 @@
 package com.example.plantswatertracker.ui.slideshow;
 
+import android.widget.Switch;
+import android.widget.TabHost;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.plantswatertracker.R;
+import com.google.android.material.tabs.TabItem;
 
 public class SlideshowViewModel extends ViewModel {
 
@@ -10,8 +16,10 @@ public class SlideshowViewModel extends ViewModel {
 
     public SlideshowViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow fragment");
+        //mText.setValue("Click on the tabs below to view the amount of water you saved in each scenario!");
+
     }
+
 
     public LiveData<String> getText() {
         return mText;
