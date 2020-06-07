@@ -99,8 +99,10 @@ public class MainActivity extends AppCompatActivity  {
         for(String s : saved_data){
             String[] split = s.split(" ");
             String added =  "\n" + split[0].replace("_", " ") + "\n\nType: " + split[1].replace("_", " ");
-            data.add(added);
-            full_data.add(s);
+            if(!data.contains(added)) {
+                data.add(added);
+                full_data.add(s);
+            }
         }
 
 
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity  {
         ArrayList<String> toWrite = new ArrayList<>();
         for(String item : loaded){
             String[] split = item.split(" ");
-            if(data.contains("\n" + split[0] + "\n\nType: " + split[1])){
+            if(data.contains("\n" + split[0] + "\n\nType: " + split[1]) && !toWrite.contains(item)){
                 toWrite.add(item);
             }
 
