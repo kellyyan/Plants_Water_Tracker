@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity  {
 
         for(String s : saved_data){
             String[] split = s.split(" ");
-            String added =  "\n" + split[0] + "\n\nType: " + split[1];
+            String added =  "\n" + split[0].replace('_', ' ') + "\n\nType: " + split[1].replace('_', ' ');
 
             data.add(added);
         }
@@ -101,13 +101,13 @@ public class MainActivity extends AppCompatActivity  {
         String text = new String();
 
         if (spin.getSelectedItem().toString().equals("Annual")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
+            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
+            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 22 + "\n";
-        } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 14 + "\n";
+            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString().replace(' ', '_') + " " + 22 + "\n";
+        } else if (spin.getSelectedItem().toString().equals("Shrub (high water use)")){
+            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString().replace(' ', '_') + " " + 14 + "\n";
         } else {
             text += name + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
         }
