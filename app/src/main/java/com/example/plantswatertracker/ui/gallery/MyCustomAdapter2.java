@@ -1,4 +1,4 @@
-package com.example.plantswatertracker.ui.home;
+package com.example.plantswatertracker.ui.gallery;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,18 +10,18 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.plantswatertracker.R;
-import static com.example.plantswatertracker.MainActivity.data;
-import static com.example.plantswatertracker.MainActivity.full_data;
 
 import java.util.ArrayList;
 
-public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
+import static com.example.plantswatertracker.MainActivity.data;
+
+public class MyCustomAdapter2 extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
     private Context context;
 
 
 
-    public MyCustomAdapter(ArrayList<String> list, Context context) {
+    public MyCustomAdapter2(ArrayList<String> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -47,26 +47,13 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.my_custom_list_layout, null);
+            view = inflater.inflate(R.layout.my_custom_list_layout2, null);
         }
 
         //Handle TextView and display string from your list
         final TextView listItemText = (TextView)view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
 
-        //Handle buttons and add onClickListeners
-        Button deleteBtn = (Button)view.findViewById(R.id.delete_btn);
-
-
-        deleteBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                //do something
-                data.remove(position);
-                full_data.remove(position);
-                notifyDataSetChanged();
-            }
-        });
 
 
         return view;

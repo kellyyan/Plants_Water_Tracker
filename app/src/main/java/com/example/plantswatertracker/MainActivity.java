@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity  {
     private AppBarConfiguration mAppBarConfiguration;
 
     public static ArrayList<String> data = new ArrayList<String>();
+    public static ArrayList<String> full_data = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +69,6 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        ArrayList<String> saved_data = load();
-
-        for(String s : saved_data){
-            String[] split = s.split(" ");
-            String added =  "\n" + split[0] + "\n\nType: " + split[1];
-
-            data.add(added);
-        }
     }
 
     @Override
@@ -103,27 +96,31 @@ public class MainActivity extends AppCompatActivity  {
 
         ArrayList<String> saved_data = load();
 
-        for(String item : saved_data){
-            String s = item.replace("_", " ");
+        for(String s : saved_data){
             String[] split = s.split(" ");
-            String added =  "\n" + split[0] + "\n\nType: " + split[1];
-
-            data.add(added);
+            String added =  "\n" + split[0].replace("_", " ") + "\n\nType: " + split[1].replace("_", " ");
+            if(!data.contains(added)) {
+                data.add(added);
+                full_data.add(s);
+            }
         }
+
 
         if (spin.getSelectedItem().toString().equals("Annual")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
+            text += name.replace(" ", "_") + " " + spin.getSelectedItem().toString() + " " + 5 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Cactus/Succulent")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
+            text += name.replace(" ", "_") + " " + spin.getSelectedItem().toString() + " " + 33 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 22 + "\n";
+            text += name.replace(" ", "_") + " " + spin.getSelectedItem().toString().replace(" ", "_") + " " + 22 + "\n";
         } else if (spin.getSelectedItem().toString().equals("Shrub (desert adapted)")){
-            text += name + " " + spin.getSelectedItem().toString() + " " + 14 + "\n";
+            text += name.replace(" ", "_") + " " + spin.getSelectedItem().toString().replace(" ", "_") + " " + 14 + "\n";
         } else {
-            text += name.replace(' ', '_') + " " + spin.getSelectedItem().toString() + " " + 3 + "\n";
+            text += name.replace(" ", "_") + " " + spin.getSelectedItem().toString().replace(" ", "_") + " " + 3 + "\n";
         }
 
+
         data.add("\n" + name + "\n\nType: " + spin.getSelectedItem().toString());
+        full_data.add(text);
 
         FileOutputStream fos = null;
         try {
@@ -155,9 +152,8 @@ public class MainActivity extends AppCompatActivity  {
         ArrayList<String> loaded = load();
         ArrayList<String> toWrite = new ArrayList<>();
         for(String item : loaded){
-            String s = item.replace("_", " ");
-            String[] split = s.split(" ");
-            if(data.contains("\n" + split[0] + "\n\nType: " + split[1])){
+            String[] split = item.split(" ");
+            if(data.contains("\n" + split[0] + "\n\nType: " + split[1]) && !toWrite.contains(item)){
                 toWrite.add(item);
             }
 
